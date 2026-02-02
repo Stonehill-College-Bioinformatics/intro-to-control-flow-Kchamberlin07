@@ -1,0 +1,138 @@
+---
+title: "BIO331 -- Lab 02: Intro to git"
+subtitle: "Basic programming in R and Python and version control with git"
+author: Dee Ruttenberg (Adapted from Scott Wolf, Michelle White)
+date: Jan. 28, 2026
+output: html_document
+---
+
+# Precept intro
+Labs can be found [here](https://deeruttenberg.github.io/#labs).
+
+We're going to mostly be doing the precept problem sets during class, but I'll be posting them as well. If you don't finish during class, you can finish them on your own time and submit them to the appropriate assignment in 1 week to GitHub Classroom.
+
+# Introduction
+
+This precept is focused utilizing GitHub for version control, which is how we will submit assigments and projects throughout the semester.  Learning to use Github is especially important in bioinformatics, because it allows you to more easily work on collaborative projects, document your code, and engage with the bioinformatic community. Github allows you to create a global *repository* of all your code your code. If you develop a website, it will contain all the code to run your website. If you're doing a research project, it will contain all the code needed to reproduce your findings. If you're building a program, it may provide all the code needed to run that program. 
+
+# Getting started
+
+We support two IDEs in the course: RStudio and VS Code.  I'll be using RStudio for the early precepts, and VS Code for the later precepts. VS Code is a bit more lightweight and extensible, but RStudio has a lot of nice features specifially for R.
+
+Before going forward, let's install the basic software we need (you should have done this last week!): [R](https://cran.r-project.org/) and [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). 
+
+#### RStudio
+[RStudio](https://rstudio.com/) 
+
+#### Running R
+
+Make sure that you're able to run basic R code like the following:
+
+```{r}
+print("Hello world!")
+```
+
+## GitHub
+
+First, you'll need to create an account on GitHub. You can do that at [https://github.com/join](https://github.com/join).
+
+## GitHub Desktop
+
+Finally, you'll want to connect your global repository on GitHub to the local repository on your computer.  The best way to do this is through GitHub Desktop, which can be downloaded at [https://desktop.github.com/download/](https://desktop.github.com/download/)
+
+### GitHub Classroom
+
+#### Accepting the assignment
+
+When you accept the assignment, it will create a global private repository (only visible to BIO331 staff and yourself) that you can use. Once you have that repository, you can clone it to your local machine and start working on it.
+
+### Cloning the repository
+
+<<<<<<< HEAD
+To clone the repository, you'll want to go to your global repository in GitHub, and click on the green code button.  Then, you can copy the HTTPS link (usually something like https://github.com/Stonehill-College-Bioinformatics/introduction-to-github-classroom-[YOURUSERNAME].git). In your Github Desktop page, you can then press add repository, clone repository, and enter that link.  Once you've done that, you're set up!
+=======
+To clone the repository, you'll need to copy the URL from the repository page.  You can do this by clicking the green "Code" button and copying the URL.  Then, in your terminal, you can run `git clone <URL>` to clone the repository to your local machine.
+
+```{bash, eval=FALSE, engine="sh"}
+git clone https://github.com/Stonehill-College-Bioinformatics/introduction-to-github-classroom-{GITHUB_USERNAME}.git # Note that this can be found on the repository page under the green "Code" button after github has created the repository
+cd introduction-to-github-classroom-{GITHUB_USERNAME}
+git checkout -b precept-1 # or what you want to call your branch
+```
+>>>>>>> c077350fb4b9cf47fa66c89617f31a2a8f4c44ac
+
+### Working on the assignment in R
+
+For this assignment, you can just create an simple example R file containing some code and text. You can then commit and push your changes to the branch you created.
+
+__Running R code__: To run R code (in RStudio), you can hit cmd+enter while selecting the line or block of code you want to run (if no line(s) are selected, then just the line that your cursor is on will run).  You can also run the entire file by hitting cmd+shift+s or cmd+shift+enter. If you're working on windows, you can use ctrl instead of cmd. If you're working on a R Markdown file, you can just click the play button to run "chunks" of code (delineated by 3 '`' symbols followed by curly brackets)
+
+Our goal is to make a simple R file for exploring the iris data set (we'll explain the structure of this dataset in two labs!).
+
+```{r}
+# ----- Loading and Exploring the iris dataset -----
+
+# Load the dataset -- note that this is a built-in dataset in R
+data(iris)
+
+# View the first few rows to understand its structure
+head(iris)
+
+# Check the detailed structure of the dataset for more information on its columns
+str(iris)
+
+# Generate summary statistics to get a sense of the data distribution
+summary(iris)
+
+# ----- Data Visualization -----
+
+# Scatter plot visualizing the relationship between Sepal measurements
+plot(iris$Sepal.Length, iris$Sepal.Width, main="Sepal Length vs Sepal Width", 
+     xlab="Sepal Length", ylab="Sepal Width", col=iris$Species, pch=16, cex=1.3)
+legend("topright", legend=levels(iris$Species), col=1:3, pch=16)
+
+# Scatter plot visualizing the relationship between Petal measurements
+plot(iris$Petal.Length, iris$Petal.Width, main="Petal Length vs Petal Width", 
+     xlab="Petal Length", ylab="Petal Width", col=iris$Species, pch=16, cex=1.3)
+legend("topright", legend=levels(iris$Species), col=1:3, pch=16)
+
+# ----- Modifying the Dataset -----
+
+# Add a new column 'Petal.Length.Class' that classifies flowers based on petal length
+iris$Petal.Length.Class <- ifelse(iris$Petal.Length < 2, "Short", 
+                           ifelse(iris$Petal.Length < 5, "Medium", "Long"))
+
+# View the initial rows of the modified dataset to see the added column
+head(iris)
+```
+
+Once you save the new file in your local repository, Github Desktop will notice you have changed your local repository, and give you the option to commit those changes (giving a note saying what you did) and push them (sending the changes to the global repository)
+
+#### Creating a PR
+
+To create a Pull Request on GitHub, you navigate to your branch (under branches on web interface), and select contribute > open pull request.
+
+#### Example Pull Request
+```{verbatim}
+# Summary
+
+This PR shows example formatting. Because PRs are the primary location at which code is evaluated, make sure that your PRs are clear and descriptive. PRs can include markdown so they can become relatively complex if the assignment is complicated. This should be paired with will documented code to allow others to easily follow your design and implementation.
+
+# Design notes
+
+N/A
+
+# Implementation notes
+
+N/A
+```
+
+> **WARNING**
+>
+> Be careful here! Please try to only merge PRs when you have completed assignments. If you merge multiple PRs for an assignment, I'll try to loop back to them if I've already graded one, but if I miss them for some reason, please let me know!
+
+# Submission
+
+For this precept, you'll just need to make an updated global repository with your changes. I'll be checking the PRs for the assignment to make sure you wrote __something__ in R.
+
+
+
