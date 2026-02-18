@@ -135,17 +135,42 @@ Store the result in a new variable called grade_tags. Ensure the order in grade_
 
 ```{r}
 grades <- c(91, 77, 68, 65, 89, 72, 85, 90, 80)
-
+grades_tag <- ifelse(
+  grades>90, "Excellent",
+  ifelse(grades >= 80 & grades <= 90, "Good", "Fair")
+)
+print(grades_tag)
 ```
 
 ### 2. For
 
 Create a sequence of numbers from 3 to 15 (included). Using a for loop, compute the cumulative product of these numbers and print the results.
 
+```{r}
+counter = 1 
+for (i in 3:15) {
+  counter = counter * i
+}
+print(counter)
+
+
+```
+
 
 ### 3. While
 
 Starting with a number 50, decrease it by 5% in every iteration using a while loop. Continue the iterations until the number goes below 20. Return and print the number of iterations it took.
+
+```{r}
+counter=50
+iterations=0
+while (counter >= 20) {
+  counter <- counter * 0.95  # decrease by 5%
+  iterations = iterations + 1
+}
+print(iterations)
+
+```
 
 
 ### 4. Functions with conditionals and loops
@@ -157,9 +182,36 @@ Write a function named series_sum that accepts two arguments: a start value 's' 
 ```{r}
 # as in R
 5%%2
+series_sum(1, 10)
+
+series_sum <- function(s, e) {
+  total <- 0
+  
+  for (i in s:e) {
+    if (i %% 3 != 0) {   # skip numbers divisible by 3
+      total <- total + i
+    }
+  }
+print(i)
+}
+
 ```
 
 
 ### 5. Recursive Functions
 
 The Lucas series is a sequence of numbers similar to the Fibonacci series but starts with 2 and 1 instead of 0 and 1. Write a recursive function `lucas` that computes the nth value of the Lucas series.
+
+```{r}
+lucas <- function(n) {
+     if (n==0) {
+          return(2)
+      if (n==1) {
+          return(1)
+}
+     } else {
+     return(lucas(n-1)+ lucas (n-2)) 
+     }
+}
+lucas(5)
+```
